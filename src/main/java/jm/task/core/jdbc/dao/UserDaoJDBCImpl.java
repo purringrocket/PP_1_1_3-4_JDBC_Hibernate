@@ -32,8 +32,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     @Override
     public void dropUsersTable() {
-        String sqlQuery = "DROP TABLE IF EXISTS users";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+        String mySqlQuery = "DROP TABLE IF EXISTS users";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(mySqlQuery)) {
             connection.setAutoCommit(false);
             preparedStatement.executeUpdate();
             connection.commit();
@@ -52,8 +52,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
-        String sqlQuery = "INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+        String mySqlQuery = "INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(mySqlQuery)) {
             connection.setAutoCommit(false);
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
