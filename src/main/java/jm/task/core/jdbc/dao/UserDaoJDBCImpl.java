@@ -16,8 +16,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     @Override
     public void createUsersTable() {
-        String sqlQuery = "CREATE TABLE IF NOT EXISTS users (id BIGINT PRIMARY KEY AUTO_INCREMENT, name varchar(45), lastName varchar(45), age tinyint)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+        String mySqlQuery = "CREATE TABLE IF NOT EXISTS users (id BIGINT PRIMARY KEY AUTO_INCREMENT, name varchar(45), lastName varchar(45), age tinyint)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(mySqlQuery)) {
             preparedStatement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
@@ -26,8 +26,8 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void dropUsersTable() {
-        String sqlQuery = "DROP TABLE IF EXISTS users";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+        String mySqlQuery = "DROP TABLE IF EXISTS users";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(mySqlQuery)) {
             preparedStatement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
@@ -36,8 +36,8 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        String sqlQuery = "INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+        String mySqlQuery = "INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(mySqlQuery)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
@@ -50,8 +50,8 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) {
-        String sqlQuery = "DELETE FROM users WHERE id=?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+        String mySqlQuery = "DELETE FROM users WHERE id=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(mySqlQuery)) {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
             connection.commit();
@@ -62,9 +62,9 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
-        String sqlQuery = "SELECT id, name, lastName, age FROM users";
+        String mySqlQuery = "SELECT id, name, lastName, age FROM users";
         try (Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            ResultSet resultSet = statement.executeQuery(mySqlQuery);
             while (resultSet.next()) {
                 User newUser = new User();
                 newUser.setId(resultSet.getLong("id"));
@@ -80,8 +80,8 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void cleanUsersTable() {
-        String sqlQuery = "TRUNCATE TABLE users";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+        String mySqlQuery = "TRUNCATE TABLE users";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(mySqlQuery)) {
             preparedStatement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
