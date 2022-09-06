@@ -12,7 +12,7 @@ import java.util.List;
 import static jm.task.core.jdbc.util.Util.getSessionFactory;
 
 public class UserDaoHibernateImpl implements UserDao {
-    Transaction transaction = null;
+    Transaction transaction;
 
     public UserDaoHibernateImpl() {
 
